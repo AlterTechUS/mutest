@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="79">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df name="UserCode" root=".">
+      <in>usercode.cpp</in>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="0">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile CONF=Debug</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean CONF=Debug</cleanCommand>
+          <executablePath>../libUserCode.dll</executablePath>
+          <ccTool>
+            <incDir>
+              <pElem>C:/MuTest/bin</pElem>
+            </incDir>
+          </ccTool>
+        </makeTool>
+      </makefileType>
+	  <folder path="UserCode">
+        <ccTool>
+          <incDir>
+            <pElem>C:/MuTest/bin</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+    </conf>
+    <conf name="Release" type="0">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile CONF=Release</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean CONF=Release</cleanCommand>
+          <executablePath>../libUserCode.dll</executablePath>
+          <ccTool>
+             <incDir>
+              <pElem>C:/MuTest/bin</pElem>
+            </incDir>
+          </ccTool>
+        </makeTool>
+      </makefileType>
+	  <folder path="UserCode">
+        <ccTool>
+          <incDir>
+            <pElem>C:/MuTest/bin</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+    </conf>
+  </confs>
+</configurationDescriptor>

@@ -1,0 +1,88 @@
+STIL 1.0;
+Signals {
+  "VCC" Supply;
+  "VCC_PE" In;
+  "DIR" In;
+  "OE/" In;
+  "A1" InOut;
+  "A2" InOut;
+  "A3" InOut;
+  "A4" InOut;
+  "A5" InOut;
+  "A6" InOut;
+  "A7" InOut;
+  "A8" InOut;
+  "B1" InOut;
+  "B2" InOut;
+  "B3" InOut;
+  "B4" InOut;
+  "B5" InOut;
+  "B6" InOut;
+  "B7" InOut;
+  "B8" InOut;
+}
+SignalGroups {
+  "ALL_CTRL_PIN" = '"DIR"+"OE/"';
+  "BUS1A" = '"A1"+"A2"+"A3"+"A4"+"A5"+"A6"+"A7"+"A8"';
+  "BUS1B" = '"B1"+"B2"+"B3"+"B4"+"B5"+"B6"+"B7"+"B8"';
+  "ALL_PIN_DIG" = '"DIR"+"OE/"+"A1"+"A2"+"A3"+"A4"+"A5"+"A6"+"A7"+"A8"+"B1"+"B2"+"B3"+"B4"+"B5"+"B6"+"B7"+"B8"';
+}
+
+Timing {
+	WaveformTable "TimingBlock_VIN" {
+		<Per0> Period '25ns';
+		Waveforms {
+			"BUS1A" { 
+				<Wav0> 01 { '0s' ForceDown/ForceUp;  }
+				<Wav1> Z { '0s' ForceOff;  }
+				<Wav2> LH { '0s' ForceOff; '12.5ns' CompareLow/CompareHigh;  }
+				<Wav3> X { '20ns' CompareUnknown;  }
+				<Wav4> 4 { '0s' ForceOff; '12.5ns' ExpectOff;  }
+			}
+			"BUS1B" { 
+				<Wav0> 01 { '0s' ForceDown/ForceUp;  }
+				<Wav1> Z { '0s' ForceOff;  }
+				<Wav2> LH { '0s' ForceOff; '12.5ns' CompareLow/CompareHigh;  }
+				<Wav3> X { '20ns' CompareUnknown;  }
+				<Wav4> 4 { '0s' ForceOff; '12.5ns' ExpectOff;  }
+			}
+			"DIR" { 
+				<Wav0> 01 { '0s' ForceDown/ForceUp;  }
+			}
+			"OE/" { 
+				<Wav0> 01 { '0s' ForceDown/ForceUp; }
+			}
+			"VCC_PE" { 
+				<Wav0> 01 { '0s' ForceDown/ForceUp; }
+		}
+	}
+}
+}
+
+
+Pattern "DC" {
+	W "TimingBlock_VIN";
+			
+	// First vector
+
+		V		{"DIR"= 1; "OE/"= 1; "BUS1A"=ZZZZZZZZ; "BUS1B"=ZZZZZZZZ;"VCC_PE"=0;	}
+		
+	
+	Loop 100 { V{} Ann {* StabiliZation *}}
+	
+		V		{"DIR"= 0; "OE/"= 0; "BUS1B"=00000000; "BUS1A"=LLLLLLLL;		}
+		V		{"DIR"= 0; "OE/"= 0; "BUS1B"=11111111; "BUS1A"=HHHHHHHH;		}
+		V		{"DIR"= 1; "OE/"= 0; "BUS1A"=00000000; "BUS1B"=LLLLLLLL;		}
+		V		{"DIR"= 1; "OE/"= 0; "BUS1A"=11111111; "BUS1B"=HHHHHHHH;		}		
+		V		{"DIR"= 0; "OE/"= 1; "BUS1B"=00000000; "BUS1A"=ZZZZZZZZ;		}
+		V		{"DIR"= 0; "OE/"= 1; "BUS1B"=11111111; "BUS1A"=ZZZZZZZZ;		}
+		V		{"DIR"= 1; "OE/"= 1; "BUS1A"=00000000; "BUS1B"=ZZZZZZZZ;		}
+		V		{"DIR"= 1; "OE/"= 1; "BUS1A"=11111111; "BUS1B"=ZZZZZZZZ;		}
+
+
+
+	Loop 100 { V{} Ann {* StabiliZation *}}
+		
+																																																     
+   	Stop; V { }																																														     
+}

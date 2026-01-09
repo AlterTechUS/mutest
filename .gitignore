@@ -41,5 +41,5 @@
 *.dwo
 
 # mutest file
-*.stil
-
+*.bak
+*.backup
