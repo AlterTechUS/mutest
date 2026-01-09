@@ -43,3 +43,4 @@
 # mutest file
 *.bak
 *.backup
+private/
