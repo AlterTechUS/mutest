@@ -1,0 +1,123 @@
+STIL 1.0;
+Signals {
+  "VCC" Supply;
+  "VCC_PE" In;
+  "DIR" In;
+  "OE/" In;
+  "A1" InOut;
+  "A2" InOut;
+  "A3" InOut;
+  "A4" InOut;
+  "A5" InOut;
+  "A6" InOut;
+  "A7" InOut;
+  "A8" InOut;
+  "B1" InOut;
+  "B2" InOut;
+  "B3" InOut;
+  "B4" InOut;
+  "B5" InOut;
+  "B6" InOut;
+  "B7" InOut;
+  "B8" InOut;
+}
+SignalGroups {
+  "ALL_CTRL_PIN" = '"DIR"+"OE/"';
+  "BUS1A" = '"A1"+"A2"+"A3"+"A4"+"A5"+"A6"+"A7"+"A8"';
+  "BUS1B" = '"B1"+"B2"+"B3"+"B4"+"B5"+"B6"+"B7"+"B8"';
+  "ALL_PIN_DIG" = '"DIR"+"OE/"+"A1"+"A2"+"A3"+"A4"+"A5"+"A6"+"A7"+"A8"+"B1"+"B2"+"B3"+"B4"+"B5"+"B6"+"B7"+"B8"';
+}
+
+Timing {
+    WaveformTable "TimingBlock1_FUNC2" {
+        <Per0> Period '30ns';
+        Waveforms {
+            "OE/" {
+                <Wav0> 0 { '0s' ForceDown; }
+			    <Wav1> 1 { '0s' ForceUp; }
+                <Wav2> T { '0s' ForceUp; '15ns' ForceDown;}
+            }
+            "DIR" {
+                <Wav0> 01 { '0s' ForceDown/ForceUp; }
+            }
+            "BUS1A" {
+                <Wav0> 01 { '0s' ForceDown/ForceUp; }
+                <Wav1> Z { '0s' HighZ; }
+                <Wav2> LH { '0s' ForceOff; '70ns' CompareLow/CompareHigh; }
+            }
+            "BUS1B" {
+                <Wav0> 01 { '0s' ForceDown/ForceUp; }
+                <Wav1> Z { '0s' HighZ; }
+                <Wav2> LH { '0s' ForceOff; '70ns' CompareLow/CompareHigh; }
+            }
+			"VCC_PE" { 
+				<Wav0> 01 { '0s' ForceDown/ForceUp; }
+			}
+        }
+    }
+}
+
+PatternBurst "BurstOne" {
+	PatList {
+		"INIT_HIZ";
+		"A_TO_B_TEST";
+//		"INIT_HIZ";
+		"SWITCH_DIR";
+	}
+}
+
+PatternExec {
+	PatternBurst "BurstOne";
+}
+
+// HIi-Z pattern
+Pattern "INIT_HIZ" {
+    W "TimingBlock1_FUNC2";
+ 
+	V		{"DIR"= 1; "OE/"= 1; "BUS1A"=ZZZZZZZZ; "BUS1B"=ZZZZZZZZ;"VCC_PE"=0;	}
+}
+
+// patter A to B
+Pattern A_TO_B_TEST {
+    W "TimingBlock1_FUNC2";
+ 
+    // Disable outputs before direction set
+//	V		{"DIR"= 1; "OE/"= 1; "BUS1A"=ZZZZZZZZ; "BUS1B"=ZZZZZZZZ;"VCC_PE"=0;	}
+ 
+    // Enable A -> B
+	V		{"DIR"= 1; "OE/"= 0; "BUS1A"=00000000; "BUS1B"=LLLLLLLL;"VCC_PE"=0;	}
+	
+	// Walking -1 example
+	V		{"DIR"= 1; "OE/"= 0; "BUS1A"=00000001; "BUS1B"=LLLLLLLH;		}
+	V		{"DIR"= 1; "OE/"= 0; "BUS1A"=00000010; "BUS1B"=LLLLLLHL;		}
+	V		{"DIR"= 1; "OE/"= 0; "BUS1A"=00000100; "BUS1B"=LLLLLHLL;		}
+	V		{"DIR"= 1; "OE/"= 0; "BUS1A"=00001000; "BUS1B"=LLLLHLLL;		}
+	V		{"DIR"= 1; "OE/"= 0; "BUS1A"=00010000; "BUS1B"=LLLHLLLL;		}
+	V		{"DIR"= 1; "OE/"= 0; "BUS1A"=00100000; "BUS1B"=LLHLLLLL;		}
+	V		{"DIR"= 1; "OE/"= 0; "BUS1A"=01000000; "BUS1B"=LHLLLLLL;		}
+	V		{"DIR"= 1; "OE/"= 0; "BUS1A"=10000000; "BUS1B"=HLLLLLLL;		}
+}
+
+// Safe Direction Switch (A → B → B → A)
+Pattern SWITCH_DIR {
+    W "TimingBlock1_FUNC2";
+
+    // Disable outputs before direction set
+//	V		{"DIR"= 1; "OE/"= 1; "BUS1A"=ZZZZZZZZ; "BUS1B"=ZZZZZZZZ;"VCC_PE"=0;	}
+
+    // Change direction
+//	V		{"DIR"= 0; "OE/"= 1; "BUS1A"=ZZZZZZZZ; "BUS1B"=ZZZZZZZZ;"VCC_PE"=0;	}
+
+    // Enable B -> A
+	V		{"DIR"= 0; "OE/"= T; "BUS1A"=LLLLLLLH; "BUS1B"=00000001;"VCC_PE"=0; }
+	V		{"DIR"= 0; "OE/"= 0; "BUS1A"=LLLLLLHL; "BUS1B"=00000010;		}
+	V		{"DIR"= 0; "OE/"= 0; "BUS1A"=LLLLLHLL; "BUS1B"=00000100;		}
+	V		{"DIR"= 0; "OE/"= 0; "BUS1A"=LLLLHLLL; "BUS1B"=00001000;		}
+	V		{"DIR"= 0; "OE/"= 0; "BUS1A"=LLLHLLLL; "BUS1B"=00010000;		}
+	V		{"DIR"= 0; "OE/"= 0; "BUS1A"=LLHLLLLL; "BUS1B"=00100000;		}
+	V		{"DIR"= 0; "OE/"= 0; "BUS1A"=LHLLLLLL; "BUS1B"=01000000;		}
+	V		{"DIR"= 0; "OE/"= 0; "BUS1A"=HLLLLLLL; "BUS1B"=10000000;		}
+}
+
+
+	

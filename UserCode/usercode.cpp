@@ -50,7 +50,7 @@ int Set_Relay_VCC(API * api){
 //       UBIT_ALL = 511 //       All Utility Bits
         
     api->set_loadboard_ubits( UBIT_0, UBIT_1 + UBIT_2 + UBIT_3 + UBIT_4 + UBIT_5 + UBIT_6 + UBIT_7 + UBIT_8);
-             Sleep(500); // setup delay, 500ms minimum !   
+             Sleep(500); // setup delay, 500ms minimum !
     return EXIT_SUCCESS;
 }
 int Set_Relay_VCC_PE(API * api){
@@ -157,7 +157,7 @@ int ICCH1_Measure(API * api ) {
     Compute_ICC(api, "ICCH1_MULTI","ICCH_MULTI",40,0);
     ICCH1 = icc_max;
     ICCH1_Average = icc_average;
-    // api->info_message("Test:ICCH:%e A %e %e"  ,ICCH, LoLimit, HiLimit);
+    api->info_message("Test:ICCH1max:%e A %e %e"  ,ICCH1, LoLimit, HiLimit);
     api->info_message("Test:ICCH1:%e A %e %e"  ,ICCH1_Average, LoLimit, HiLimit);
     api->datalog_print("Test:ICCH1:%e A %e %e" ,ICCH1_Average, LoLimit, HiLimit);
 
@@ -182,7 +182,7 @@ int ICCH1BA_Measure(API * api ) {
     Compute_ICC(api, "ICC1HBA_MULTI","ICC1H_MULTI",40,0);
     ICCH1 = icc_max;
     ICCH1_Average = icc_average;
-    // api->info_message("Test:ICCH:%e A %e %e"  ,ICCH, LoLimit, HiLimit);
+    api->info_message("Test:ICC1HBAmax:%e A %e %e"  ,ICCH1, LoLimit, HiLimit);
     api->info_message("Test:ICC1HBA:%e A %e %e"  ,ICCH1_Average, LoLimit, HiLimit);
     api->datalog_print("Test:ICC1HBA:%e A %e %e" ,ICCH1_Average, LoLimit, HiLimit);
 
@@ -207,7 +207,7 @@ int ICCH1AB_Measure(API * api ) {
     Compute_ICC(api, "ICC1HAB_MULTI","ICC1H_MULTI",40,0);
     ICCH1 = icc_max;
     ICCH1_Average = icc_average;
-    // api->info_message("Test:ICCH:%e A %e %e"  ,ICCH, LoLimit, HiLimit);
+    api->info_message("Test:ICCH1HABmax:%e A %e %e"  ,ICCH1, LoLimit, HiLimit);
     api->info_message("Test:ICCH1HAB:%e A %e %e"  ,ICCH1_Average, LoLimit, HiLimit);
     api->datalog_print("Test:ICCH1HAB:%e A %e %e" ,ICCH1_Average, LoLimit, HiLimit);
 
@@ -224,12 +224,13 @@ int ICCH1AB_Measure(API * api ) {
 
 
 int ICCL1BA_Measure(API * api ) {
-    double ICCL1=0,ICCL1_Average=0;
+    // double ICCL1=0;
+    double ICCL1_Average=0;
     double HiLimit, LoLimit;
     
     api->Get_dctest_values( "ICC1L_MULTI","VCC",0, THE_LIMIT_HIGH, &HiLimit, THE_LIMIT_LOW, &LoLimit, THE_END);
     Compute_ICC(api, "ICC1LBA_MULTI","ICC1L_MULTI",40,0);
-    ICCL1 = icc_max;
+    // ICCL1 = icc_max;
     ICCL1_Average = icc_average;
     // api->info_message("Test:ICCH:%e A %e %e"  ,ICCH, LoLimit, HiLimit);
     api->info_message("Test:ICCL1BA:%e A %e %e"  ,ICCL1_Average, LoLimit, HiLimit);
@@ -249,12 +250,13 @@ int ICCL1BA_Measure(API * api ) {
 
 
 int ICCL1AB_Measure(API * api ) {
-    double ICCL1=0,ICCL1_Average=0;
+    // double ICCL1=0;
+    double ICCL1_Average=0;
     double HiLimit, LoLimit;
     
     api->Get_dctest_values( "ICC1L_MULTI","VCC",0, THE_LIMIT_HIGH, &HiLimit, THE_LIMIT_LOW, &LoLimit, THE_END);
     Compute_ICC(api, "ICC1LAB_MULTI","ICC1L_MULTI",40,0);
-    ICCL1 = icc_max;
+    // ICCL1 = icc_max;
     ICCL1_Average = icc_average;
     // api->info_message("Test:ICCH:%e A %e %e"  ,ICCH, LoLimit, HiLimit);
     api->info_message("Test:ICC1LAB:%e A %e %e"  ,ICCL1_Average, LoLimit, HiLimit);
@@ -275,12 +277,13 @@ int ICCL1AB_Measure(API * api ) {
 
 
 int ICCH2BA_Measure(API * api ) {
-    double ICCH2=0,ICCH2_Average=0;
+    // double ICCH2=0;
+    double ICCH2_Average=0;
     double HiLimit, LoLimit;
     
     api->Get_dctest_values( "ICC2H_MULTI","VCC",0, THE_LIMIT_HIGH, &HiLimit, THE_LIMIT_LOW, &LoLimit, THE_END);
     Compute_ICC(api, "ICC2HBA_MULTI","ICC2H_MULTI",40,0);
-    ICCH2 = icc_max;
+    // ICCH2 = icc_max;
     ICCH2_Average = icc_average;
     // api->info_message("Test:ICCH:%e A %e %e"  ,ICCH, LoLimit, HiLimit);
     api->info_message("Test:ICC2HBA:%e A %e %e"  ,ICCH2_Average, LoLimit, HiLimit);
@@ -300,12 +303,13 @@ int ICCH2BA_Measure(API * api ) {
 
 
 int ICCH2AB_Measure(API * api ) {
-    double ICCH2=0,ICCH2_Average=0;
+    // double ICCH2=0;
+    double ICCH2_Average=0;
     double HiLimit, LoLimit;
     
     api->Get_dctest_values( "ICC2H_MULTI","VCC",0, THE_LIMIT_HIGH, &HiLimit, THE_LIMIT_LOW, &LoLimit, THE_END);
     Compute_ICC(api, "ICC2HAB_MULTI","ICC2H_MULTI",40,0);
-    ICCH2 = icc_max;
+    // ICCH2 = icc_max;
     ICCH2_Average = icc_average;
     // api->info_message("Test:ICCH:%e A %e %e"  ,ICCH, LoLimit, HiLimit);
     api->info_message("Test:ICC2HAB:%e A %e %e"  ,ICCH2_Average, LoLimit, HiLimit);
@@ -324,12 +328,13 @@ int ICCH2AB_Measure(API * api ) {
 
 
 int ICCL2BA_Measure(API * api ) {
-    double ICCL2=0,ICCL2_Average=0;
+    // double ICCL2=0;
+    double ICCL2_Average=0;
     double HiLimit, LoLimit;
     
     api->Get_dctest_values( "ICC2L_MULTI","VCC",0, THE_LIMIT_HIGH, &HiLimit, THE_LIMIT_LOW, &LoLimit, THE_END);
     Compute_ICC(api, "ICC2LBA_MULTI","ICC2L_MULTI",40,0);
-    ICCL2 = icc_max;
+    // ICCL2 = icc_max;
     ICCL2_Average = icc_average;
     // api->info_message("Test:ICCH:%e A %e %e"  ,ICCH, LoLimit, HiLimit);
     api->info_message("Test:ICC2LBA:%e A %e %e"  ,ICCL2_Average, LoLimit, HiLimit);
@@ -349,12 +354,13 @@ int ICCL2BA_Measure(API * api ) {
 
 
 int ICCL2AB_Measure(API * api ) {
-    double ICCL2=0,ICCL2_Average=0;
+    // double ICCL2=0;
+    double ICCL2_Average=0;
     double HiLimit, LoLimit;
     
     api->Get_dctest_values( "ICC2L_MULTI","VCC",0, THE_LIMIT_HIGH, &HiLimit, THE_LIMIT_LOW, &LoLimit, THE_END);
     Compute_ICC(api, "ICC2LAB_MULTI","ICC2L_MULTI",40,0);
-    ICCL2 = icc_max;
+    // ICCL2 = icc_max;
     ICCL2_Average = icc_average;
     // api->info_message("Test:ICCH:%e A %e %e"  ,ICCH, LoLimit, HiLimit);
     api->info_message("Test:ICC2LAB:%e A %e %e"  ,ICCL2_Average, LoLimit, HiLimit);
@@ -375,12 +381,13 @@ int ICCL2AB_Measure(API * api ) {
 
 
 int ICCH2_Measure(API * api ) {
-    double ICCH2=0,ICCH2_Average=0;
+    // double ICCH2=0;
+    double ICCH2_Average=0;
     double HiLimit, LoLimit;
     
     api->Get_dctest_values( "ICCH_MULTI","VCC",0, THE_LIMIT_HIGH, &HiLimit, THE_LIMIT_LOW, &LoLimit, THE_END);
     Compute_ICC(api, "ICCH2_MULTI","ICCH_MULTI",40,0);
-    ICCH2 = icc_max;
+    // ICCH2 = icc_max;
     ICCH2_Average = icc_average;
     // api->info_message("Test:ICCH:%e A %e %e"  ,ICCH, LoLimit, HiLimit);
     api->info_message("Test:ICCH2:%e A %e %e"  ,ICCH2_Average, LoLimit, HiLimit);
@@ -400,12 +407,13 @@ int ICCH2_Measure(API * api ) {
 
 
 int ICCL1_Measure(API * api ) {
-    double ICCL1=0,ICCL1_Average=0;
+    // double ICCL1=0;
+    double ICCL1_Average=0;
     double HiLimit, LoLimit;
     
     api->Get_dctest_values( "ICCL_MULTI","VCC",0, THE_LIMIT_HIGH, &HiLimit, THE_LIMIT_LOW, &LoLimit, THE_END);
     Compute_ICC(api, "ICCL1_MULTI","ICCL_MULTI",40,0);
-    ICCL1 = icc_max;
+    // ICCL1 = icc_max;
     ICCL1_Average = icc_average;
     // api->info_message("Test:ICCL:%e A %e %e"  ,ICCL, LoLimit, HiLimit);
     api->info_message("Test:ICCL1:%e A %e %e"  ,ICCL1_Average, LoLimit, HiLimit);
@@ -424,12 +432,13 @@ int ICCL1_Measure(API * api ) {
 
 
 int ICCL2_Measure(API * api ) {
-    double ICCL2=0,ICCL2_Average=0;
+    // double ICCL2=0;
+    double ICCL2_Average=0;
     double HiLimit, LoLimit;
     
     api->Get_dctest_values( "ICCL_MULTI","VCC",0, THE_LIMIT_HIGH, &HiLimit, THE_LIMIT_LOW, &LoLimit, THE_END);
     Compute_ICC(api, "ICCL2_MULTI","ICCL_MULTI",40,0);
-    ICCL2 = icc_max;
+    // ICCL2 = icc_max;
     ICCL2_Average = icc_average;
     // api->info_message("Test:ICCL:%e A %e %e"  ,ICCL, LoLimit, HiLimit);
     api->info_message("Test:ICCL2:%e A %e %e"  ,ICCL2_Average, LoLimit, HiLimit);
@@ -448,12 +457,13 @@ int ICCL2_Measure(API * api ) {
 
 
 int ICCZ1_Measure(API * api ) {
-    double ICCZ1=0,ICCZ1_Average=0;
+    // double ICCZ1=0;
+    double ICCZ1_Average=0;
     double HiLimit, LoLimit;
     
     api->Get_dctest_values( "ICCZ_MULTI","VCC",0, THE_LIMIT_HIGH, &HiLimit, THE_LIMIT_LOW, &LoLimit, THE_END);
     Compute_ICC(api, "ICCZ1_MULTI","ICCZ_MULTI",40,0);
-    ICCZ1 = icc_max;
+    // ICCZ1 = icc_max;
     ICCZ1_Average = icc_average;
     // api->info_message("Test:ICCZ:%e A %e %e"  ,ICCZ, LoLimit, HiLimit);
     api->info_message("Test:ICCD1:%e A %e %e"  ,ICCZ1_Average, LoLimit, HiLimit);
@@ -472,12 +482,13 @@ int ICCZ1_Measure(API * api ) {
 
 
 int ICCZ2_Measure(API * api ) {
-    double ICCZ2=0,ICCZ2_Average=0;
+    // double ICCZ2=0;
+    double ICCZ2_Average=0;
     double HiLimit, LoLimit;
     
     api->Get_dctest_values( "ICCZ_MULTI","VCC",0, THE_LIMIT_HIGH, &HiLimit, THE_LIMIT_LOW, &LoLimit, THE_END);
     Compute_ICC(api, "ICCZ2_MULTI","ICCZ_MULTI",40,0);
-    ICCZ2 = icc_max;
+    // ICCZ2 = icc_max;
     ICCZ2_Average = icc_average;
     // api->info_message("Test:ICCZ:%e A %e %e"  ,ICCZ, LoLimit, HiLimit);
     api->info_message("Test:ICCD2:%e A %e %e"  ,ICCZ2_Average, LoLimit, HiLimit);
@@ -495,12 +506,13 @@ int ICCZ2_Measure(API * api ) {
 }
 
 int ICCH1HR_Measure(API * api ) {
-    double ICCH1=0,ICCH1_Average=0;
+    // double ICCH1=0;
+    double ICCH1_Average=0;
     double HiLimit, LoLimit;
     
     api->Get_dctest_values( "ICCH_MULTI_HI_RANGE","VCC",0, THE_LIMIT_HIGH, &HiLimit, THE_LIMIT_LOW, &LoLimit, THE_END);
     Compute_ICC(api, "ICCH1_MULTI_HI_RANGE","ICCH_MULTI_HI_RANGE",40,0);
-    ICCH1 = icc_max;
+    // ICCH1 = icc_max;
     ICCH1_Average = icc_average;
     // api->info_message("Test:ICCH:%e A %e %e"  ,ICCH, LoLimit, HiLimit);
     api->info_message("Test:ICCH1:%e A %e %e"  ,ICCH1_Average, LoLimit, HiLimit);
@@ -519,12 +531,13 @@ int ICCH1HR_Measure(API * api ) {
 
 
 int ICCH2HR_Measure(API * api ) {
-    double ICCH2=0,ICCH2_Average=0;
+    // double ICCH2=0;
+    double ICCH2_Average=0;
     double HiLimit, LoLimit;
     
     api->Get_dctest_values( "ICCH_MULTI_HI_RANGE","VCC",0, THE_LIMIT_HIGH, &HiLimit, THE_LIMIT_LOW, &LoLimit, THE_END);
     Compute_ICC(api, "ICCH2_MULTI_HI_RANGE","ICCH_MULTI_HI_RANGE",40,0);
-    ICCH2 = icc_max;
+    // ICCH2 = icc_max;
     ICCH2_Average = icc_average;
     // api->info_message("Test:ICCH:%e A %e %e"  ,ICCH, LoLimit, HiLimit);
     api->info_message("Test:ICCH2:%e A %e %e"  ,ICCH2_Average, LoLimit, HiLimit);
@@ -544,12 +557,13 @@ int ICCH2HR_Measure(API * api ) {
 
 
 int ICCL1HR_Measure(API * api ) {
-    double ICCL1=0,ICCL1_Average=0;
+    // double ICCL1=0;
+    double ICCL1_Average=0;
     double HiLimit, LoLimit;
     
     api->Get_dctest_values( "ICCL_MULTI_HI_RANGE","VCC",0, THE_LIMIT_HIGH, &HiLimit, THE_LIMIT_LOW, &LoLimit, THE_END);
     Compute_ICC(api, "ICCL1_MULTI_HI_RANGE","ICCL_MULTI_HI_RANGE",40,0);
-    ICCL1 = icc_max;
+    // ICCL1 = icc_max;
     ICCL1_Average = icc_average;
     // api->info_message("Test:ICCL:%e A %e %e"  ,ICCL, LoLimit, HiLimit);
     api->info_message("Test:ICCL1:%e A %e %e"  ,ICCL1_Average, LoLimit, HiLimit);
@@ -568,12 +582,13 @@ int ICCL1HR_Measure(API * api ) {
 
 
 int ICCL2HR_Measure(API * api ) {
-    double ICCL2=0,ICCL2_Average=0;
+    // double ICCL2=0;
+    double ICCL2_Average=0;
     double HiLimit, LoLimit;
     
     api->Get_dctest_values( "ICCL_MULTI_HI_RANGE","VCC",0, THE_LIMIT_HIGH, &HiLimit, THE_LIMIT_LOW, &LoLimit, THE_END);
     Compute_ICC(api, "ICCL2_MULTI_HI_RANGE","ICCL_MULTI_HI_RANGE",40,0);
-    ICCL2 = icc_max;
+    // ICCL2 = icc_max;
     ICCL2_Average = icc_average;
     // api->info_message("Test:ICCL:%e A %e %e"  ,ICCL, LoLimit, HiLimit);
     api->info_message("Test:ICCL2:%e A %e %e"  ,ICCL2_Average, LoLimit, HiLimit);
@@ -592,12 +607,13 @@ int ICCL2HR_Measure(API * api ) {
 
 
 int ICCZ1HR_Measure(API * api ) {
-    double ICCZ1=0,ICCZ1_Average=0;
+    // double ICCZ1=0;
+    double ICCZ1_Average=0;
     double HiLimit, LoLimit;
     
     api->Get_dctest_values( "ICCZ_MULTI_HI_RANGE","VCC",0, THE_LIMIT_HIGH, &HiLimit, THE_LIMIT_LOW, &LoLimit, THE_END);
     Compute_ICC(api, "ICCZ1_MULTI_HI_RANGE","ICCZ_MULTI_HI_RANGE",40,0);
-    ICCZ1 = icc_max;
+    // ICCZ1 = icc_max;
     ICCZ1_Average = icc_average;
     // api->info_message("Test:ICCZ:%e A %e %e"  ,ICCZ, LoLimit, HiLimit);
     api->info_message("Test:ICCZ1:%e A %e %e"  ,ICCZ1_Average, LoLimit, HiLimit);
@@ -616,12 +632,13 @@ int ICCZ1HR_Measure(API * api ) {
 
 
 int ICCZ2HR_Measure(API * api ) {
-    double ICCZ2=0,ICCZ2_Average=0;
+    // double ICCZ2=0;
+    double ICCZ2_Average=0;
     double HiLimit, LoLimit;
     
     api->Get_dctest_values( "ICCZ_MULTI_HI_RANGE","VCC",0, THE_LIMIT_HIGH, &HiLimit, THE_LIMIT_LOW, &LoLimit, THE_END);
     Compute_ICC(api, "ICCZ2_MULTI_HI_RANGE","ICCZ_MULTI_HI_RANGE",40,0);
-    ICCZ2 = icc_max;
+    // ICCZ2 = icc_max;
     ICCZ2_Average = icc_average;
     // api->info_message("Test:ICCZ:%e A %e %e"  ,ICCZ, LoLimit, HiLimit);
     api->info_message("Test:ICCZ2:%e A %e %e"  ,ICCZ2_Average, LoLimit, HiLimit);
