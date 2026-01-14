@@ -44,3 +44,4 @@
 *.bak
 *.backup
 private/
+Patterns/*.mttp
