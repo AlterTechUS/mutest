@@ -1611,7 +1611,7 @@
 	</powers>
 	<dctests>
 		<dcblock id="5974" name="Continuity_Neg" comment="">
-			<dc id="6012" signal="ALL_PIN_DIG" clamplow="-1.6" clamphigh="5" clampdelay="200us" force="-100uA" delay="1ms" range="200uA" lowlimit="-1.5" highlimit="-0.1" type="Measure" mode="FI/MV" average="16" method="Static" order="Group" diff="Group" hook=""  pre_hook="" />
+			<dc id="6012" signal="ALL_PIN_DIG" clamplow="-1.6" clamphigh="5" clampdelay="200us" force="-100uA" delay="1ms" range="200uA" lowlimit="-0.9" highlimit="-0.1" type="Measure" mode="FI/MV" average="16" method="Static" order="Group" diff="Group" hook=""  pre_hook="" />
 		</dcblock>
 		<dcblock id="19658" name="VOH1A" comment="">
 			<dc id="19657" signal="BUS1A" clamplow="-1.5" clamphigh="6.5" clampdelay="200us" force="-12mA" delay="1m" range="BestFit" lowlimit="2.48" highlimit="3.6" type="Measure" mode="FI/MV" average="16" method="Static" order="Single" diff="Group" hook=""  pre_hook="" />
